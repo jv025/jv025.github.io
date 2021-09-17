@@ -1,8 +1,7 @@
-/* Universal Styles */
 html {
   font-size: 18px;
   font-family:"Open Sans", serif;
-  max-width:1024px;
+  max-width:80%;
   margin:auto;
 }
 
@@ -31,8 +30,6 @@ h3 {
   width: 100%;
 }
 
-
-
 /* Header */
 
 header {
@@ -55,7 +52,7 @@ header {
   display:flex;
   justify-content:space-around;
   margin: 10px;
-  align-items:center;
+  align-items:strech;
 }
 
 #banner h3 {
@@ -66,8 +63,13 @@ header {
   padding-bottom: 1.5rem;
 }
 #banner .text{
+	flex-basis:60%;
 	text-align:justify;
 	padding:20px 20px;
+}
+#banner .media{
+	padding-top:20px;
+	flex-basis:40%;
 }
 #banner .media img{
 	width:100%;
@@ -110,6 +112,9 @@ header {
     background-color: inherit;
   }
 
+  .banner{
+	flex-direction:column;
+  }
   .options-row {
     flex-direction: column;
   }
@@ -127,9 +132,6 @@ header {
   }
   
 }
-
-/* Footer */
-
 footer {
   display: flex;
   padding: 1rem 1.5rem;
