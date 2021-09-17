@@ -106,7 +106,7 @@ header {
   padding-bottom: .5rem;
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width:600px) {
   #options-section {
     padding: 2rem 1rem;
     background-color: inherit;
@@ -116,7 +116,7 @@ header {
 	flex-direction:column;
   }
   .options-row {
-    flex-direction: column;
+    flex-direction:column;
   }
 
   .option {
