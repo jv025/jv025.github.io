@@ -1,6 +1,6 @@
 html {
   font-size: 18px;
-  font-family:"Open Sans", serif;
+  font-family:"IBM Plex Mono", serif;
   max-width:80%;
   margin:auto;
 }
@@ -21,13 +21,15 @@ h3 {
   font-weight: bold;
 }
 
-.media-container {
+.media-content{
   overflow: hidden;
 }
-.media-container img,
-.media-container video {
+.media-content img,
+.media-content video {
   display: block;
   width: 100%;
+  background:white;
+  border-radius:8px;
 }
 
 /* Header */
@@ -74,16 +76,17 @@ header {
 #banner .media img{
 	width:100%;
 	height:auto;
+	
 }
 /* Menu Options */
 
 #options-section {
-  padding: 2rem 3.5rem;
-  background-color: rgb(245, 245, 245);
+  padding: 20px 20px;;
 }
 
 .options-row {
   display: flex;
+  justify-content:strech;
 }  
 .option img{
 	width:128px;
@@ -94,11 +97,11 @@ header {
   flex-basis: 33%;
   margin: 1rem;
   background-color: white;
- 
 }
 
 .option .text-content {
-  padding: 1rem 1rem 1.5rem 1rem;
+   padding: 1rem 1rem 1.5rem 1rem;
+   background-color: rgb(216, 216, 216);
 }
 
 .option h3,
@@ -108,7 +111,7 @@ header {
 
 @media only screen and (max-width:600px) {
   #options-section {
-    padding: 2rem 1rem;
+    padding: 20px 20px;
     background-color: inherit;
   }
 
