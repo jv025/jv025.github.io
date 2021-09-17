@@ -115,7 +115,7 @@ header {
     background-color: inherit;
   }
 
-  .banner{
+  #banner{
 	flex-direction:column;
   }
   .options-row {
