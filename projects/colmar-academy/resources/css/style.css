@@ -1,0 +1,114 @@
+body{
+    font-family:Helvetica;
+    font-size:22px;
+    color:rgb(87, 85, 85);
+    background-color:white;
+    text-align:center;
+  }
+  
+  
+  header{
+    display:fixed;
+    height:64px;
+    margin-left:24px;
+    margin-right:24px;
+  }
+  nav{
+    float:right;
+  }
+  nav li{
+    display:inline;
+    font-family:Arial;
+    font-size: 20px;
+    padding-left:16px;
+  }
+  .logo{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    float:left;
+  }
+  .logo img{
+    height:64px;
+    width:auto;
+  }
+  .logo h2{
+    display:inline;
+    color:darkgrey;
+    font-size:32px;
+    font-weight:normal;
+  }
+  
+#banner{
+  background-color:lightgrey;
+}
+#banner button{
+  padding-top:8px;
+  padding-bottom:8px;
+  background-color:rgb(126, 126, 126);
+  font-size:16px;
+  color:#fff;
+  border:0px;
+  width:100%;
+  
+}
+
+#info{
+  margin:0;
+  background-color:white;
+  text-align:left;
+}
+.info-image{
+  display:flex;
+  padding:16px 16px;
+  border-top:1px solid #CCC;
+}
+.info-image img{
+  flex-basis:35%;
+  height:auto;
+}
+.info-text{
+  padding-left:16px;
+  flex-basis:65%;
+  display:flex;
+  flex-direction:column;
+}
+/* POSICIONAMIENTO DE LAS CAPAS FLEX-BOX */
+
+.flex-container{
+    width:100%;
+    padding:32px 24px;
+    display:flex;
+    justify-content:space-around;
+  
+}
+.flex-container .media-div{
+    flex-basis:60%;
+}
+.flex-container .media-div img{
+    height:auto;
+}
+.flex-container .text-div{
+    flex-basis:40%;
+    padding-left:24px;
+    text-align:left;
+}
+
+.flex-columns{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+  footer .copyright{
+    float:left;
+  }
+   
+  footer .terms{
+    float:right;
+  }
+
+  footer .terms li{
+      display:inline;
+  }

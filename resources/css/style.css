@@ -1,0 +1,140 @@
+/* Universal Styles */
+html {
+  font-size: 18px;
+  font-family:"Open Sans", serif;
+  max-width:1024px;
+  margin:auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h2 {
+  padding-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+.media-container {
+  overflow: hidden;
+}
+.media-container img,
+.media-container video {
+  display: block;
+  width: 100%;
+}
+
+
+
+/* Header */
+
+header {
+  width:100%;
+  background-color:#000;
+  height:52px;
+  color:#fff;
+  margin:0;
+  padding-left:10px;
+  top:0;
+  display: fixed;
+  border-radius:5px;
+ 
+}
+
+
+/* Banner */
+#banner {
+  background-color: #fff;
+  display:flex;
+  justify-content:space-around;
+  margin: 10px;
+  align-items:center;
+}
+
+#banner h3 {
+  font-size: 2rem;
+}
+
+#banner p {
+  padding-bottom: 1.5rem;
+}
+#banner .text{
+	text-align:justify;
+	padding:20px 20px;
+}
+#banner .media img{
+	width:100%;
+	height:auto;
+}
+/* Menu Options */
+
+#options-section {
+  padding: 2rem 3.5rem;
+  background-color: rgb(245, 245, 245);
+}
+
+.options-row {
+  display: flex;
+}  
+.option img{
+	width:128px;
+	height:auto;
+	margin:auto;
+}
+.option {
+  flex-basis: 33%;
+  margin: 1rem;
+  background-color: white;
+ 
+}
+
+.option .text-content {
+  padding: 1rem 1rem 1.5rem 1rem;
+}
+
+.option h3,
+.option h4 {
+  padding-bottom: .5rem;
+}
+
+@media only screen and (max-width: 770px) {
+  #options-section {
+    padding: 2rem 1rem;
+    background-color: inherit;
+  }
+
+  .options-row {
+    flex-direction: column;
+  }
+
+  .option {
+    margin: .25rem 0;
+  }
+
+  .option .text-content {
+    background-color: rgb(216, 216, 216);
+  }
+
+  option h3 {
+    padding-bottom: 0;
+  }
+  
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  padding: 1rem 1.5rem;
+  font-size: .75rem;
+  color: rgb(112, 112, 112);
+}
+
+}
