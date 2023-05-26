@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Bajas - pruebas</title>
+        <style>
+            :root {
+                --main-bg-color: #cbdbf5;
+                --main-color: #4287f5;
+            }
+            body{ font-family:'Gill Sans', 'Gill Sans MT', Calibri, Arial, 'Trebuchet MS', sans-serif;font-size:16px;}
+            #ppal{
+                width:1024px;
+                margin:auto;
+            }
+            #ppal input { font-size:16px; }
+            #ppal select{
+                border:0px;
+                border-bottom:1px solid #000;
+                background:#fff;
+            }
+            .tabla_ofertas{
+                border-spacing: 5px;
+                border-collapse: collapse; 
+            } 
+            .tabla_ofertas td{
+                padding:4px;
+                text-align:center;
+            } 
+            .tabla_ofertas .cab {
+                font-weight:bold;
+                color: var(--main-color);
+
+            }
+            .lpar{
+                background:var(--main-bg-color);
+            }
+            .limpar{
+                background:#fcfcfc;
+            }
+            .ok{
+                color:black;
+                border:0px;
+                border-bottom:1px solid black;
+            } 
+            .readonly{
+                border:0px;background:#FCFCCC;
+            }
+            :readonly{
+                border:0px;background:#FCFCCC;
+            }
+            .ok_estado{
+                color:black;
+                border:0px;
+                height:28px;
+                background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAADJklEQVRIS6VWTUwTURCe6dYEREk00ZiICtEYTiYejHrQiCbG2l2KMeGikhaitIWiHpSLMT17kERIi4j9UfBCCEJbG4wxxrsXL4QYkR8jF07UaKTdHWcXdinbbYv4ks3uezPv+958M++9RSjRbr2QDgqy4gJAJ7vV8lOz5v6d37NEkLSBMB5qHV8oBoNWBm9c3I8yPgSkNrYLpRbBNoUXMEog3O/3vJ41+xYQ+KJSEwO/BIIdZYDN5gzPux52pybyDRsI/FHxNgE8ZgfbP4Lr7goh3u13J57oAwaBtnKg0f8AN0g4kit6JBpB4JmjJrdNmNqCLMUCzQiKrb6vbeKHRsDSPGdpWrcoyyggfubo721YIMJg2J28iaulSDObqJYCfgR6GnKnfMAfHbHLZxWyvc/Dke05uRZ9UWeAy8xIymajIKDYvrkTbcFgkMt0tfli4heO4oiBgdDJBFKaw7u0WeA1v1dLVZUtI80jsj6vIyK5FKQx7huFwx9vsIC1DBMSjO2d/9kcDH7I6a7+mHSRiMa5X2GaPs0RiMs8uNOMS4AfWdpDPK4+ekvIK4tXB9o/ZTcBrrpkLAkQoTvkTj4KDDmqc1n7W5bwJDtP2jOyq7cr/ceQJSZeUAgS3K8sErhGMM3Go3kOM2FP8rCRuGHnLlhBT0VVZbineeS3Pu6NiudY4xT3t5dQVZWoIMm/ZJSPDbjTX4tN5Mo7w7nk4oCqUinTkuyNiJ0sSa/JcZ5JzluRtMfF0zYFJq3yVpBHIj/6I64DhPI3NpqP5TlBwIa+loRq0xpHe4rzoYJXl1q5ZkPI2bNynVazHPIgj6hnv7ktcCQNaiTeeONxVJR37LC7LLiGz7vck/JqBNoFo8CUZdgIS7w7VWCpnOZ5xMuyPVs/cGNycf24jksOUEgtuXI3WLkAFAZtCnmSKtb6ttYiiUldSNTDn1u+cDhHd8KelFE0hVdmzNkIhEOWcpVe+zIRXutvTSTz3Swv/UDEsUcG4QHZwM/628toop6mw6x5t6q52deSQHdau+lc/N/g5L1SR7j628IHnvrbwncIpoRcbqL3ZlrtW7a/T5crdMAHPvQAAAAASUVORK5CYII=') no-repeat right;
+                background-size:24px 24px;
+            }
+            .excede{
+                color:lightgray;
+                border:0px;
+                border-bottom:1px solid lightgray;
+            } 
+            .excede_estado{
+                color:black;
+                border:0px;
+                height:28px;
+                background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABaUlEQVRYR+2UvUoEMRSFdxtLwUZXwVbB1spyrawUBQWfQN/CysJ+n8FCOxFFBBUbwQcQLK3ETuy00e/oBC4hk2wGZhckgQOZ5P6ce+7NdDtjXt0x5+8UAkWBokBbCizzvK/BVM0z3+H8VHdtEVDsGImREIiRGBmBBVjcgVmvFY0JTBDoAByBj8RvXMlvwVxl921a3oiAkp+ADfAA1iIk/OQX2B6C82owswnY5K7wOhKh5Fs4fZrB3Mt5BUquJ7MekNwnsYjNjZH9jP02+DK+K+wnwZXOUs/Qr/wNn10wAEtVUEei5/VcsrvKA9z/jmIE/Mpfse+DZ6Cp1oCpYq1HMF+d6ztUeZBEHYFQ5atEeDJRZthLbqeEu7pkswnU8+QKERgmuQvsk8hKHmpBTnKfxEtO5c7ZKhDreUrKaQzegZ32lM/vvSWgIPdAg2UHbqhATY38GdB0H4N9oGlvfaX+A4VAUaAo8P8V+AF09U0hBpZ3bAAAAABJRU5ErkJggg==') no-repeat right;
+                background-size:24px 24px;
+            }    
+            .baja{
+                color:red;
+                border:0px;
+                border-bottom:1px solid red;
+            }        
+            .baja_estado {
+                color:red;
+                border:0px;
+                height:28px;
+                background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACLUlEQVRIS7WWz0sCQRTHZ7ZViOoSBEEWCWar1v9RBGXQqbpEBBHRj0tdskv3ojoF0qXyVIfs1x9SuS6KBUV16qBFoOtu3xlcMXN3dcGBYdmdN9/P2/dm5g0lFu0xFOoTisUJmIyh96N7SuaveD6jX6uieDn88PBiJkNrDSh+f48mCNsYm0dvsXICYxqh9ILo+kYgmWTQP+0fIBEIhKmun8Cq3Ua4ejiHebOSosQrB/4AkoODqzqluzAQGhQ3zDVA1gE5MD6UASXPL8zEaVsbcU9N8Xn583Oif3+b+cAgk8afcEDK5/MgWbJVWITubtIRi3HR3PQ00T4+rH6ShUsC5I0DZEk6xmPOakaDAAJAFIAFWlqKGbvV0igAekVRVfspEruCxO7bJdUBgEB3mSI8dxAfaQYAYbplgBTEfc0AQFNhgFw9m8pJiKD71WxAlgEUkPxNClGy7iQTt5uIwSD3Q00ksJ3zdj6xvcCTvAzLQ1trBwYALNH7oaFebIgnu43WwFlkuKJC18uPCmy2KDYFO/tNm4NVdIT6sMgBpQLDDrsOM4LQ2UlaIxE+/LOzQ7TPTyt/snBYCsrye/m4BmQUVezKLlR1pEKDTRjeMy1SXXDYubSH744LDuauQby8aP6VTORjHJBTq3CZ/EUW32cgfl05XrPoowB1oQBtwXAJXbQJC6tgZwjvJot5tW1NgGHEKl3B5eLXFoh48SxfW/CegeiNq1CID6TT7BpTs/0CpYEArYKVAC8AAAAASUVORK5CYII=') no-repeat right;
+                background-size:24px 24px;
+            }
+            .boton{
+                border-radius:8px;
+                font-family:'Arial Narrow', Arial, sans-serif;
+                background-color: var(--main-color);
+                color:#fff;
+                border:0px;
+                width:220px;
+                padding:5px;
+                cursor:pointer;
+                cursor:hand;
+            }
+            .reload{
+                background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAABtklEQVRYw+WVwUpCQRSGBw0ly7ZRuCmqZdAqgnZFvkAS+iwthFASpLVmuGjVmwRFtGlbUC3Csp0E14qvheNoeG1mujMrz9L7n/8bDv85CjFxRdE3AM8I8IwAzwjwjAAPCNLkaXBFmy44RrBGkw/GVTQE01T55K+KAmCVO/Bnv8HrkNU9JXZZIOHu9QP7B/aJOY0pqaHhnJNyvmhUlf2x+algyzyY/eScmx87jghYNgM01exTIV/H2QPUTezn1FrljEe6LTs6zOrFeRXMmDEgzqPsOtCLG1JasopFRXad6qVXUrprBdiTXdd6aVtKF6wAi7LrTS/tH+SEFWBKdn3ppd9SGrcCJGVXoJe+S+m8FSAju1p66Y2U7lgBsrLrUi89ixTTmvmiPfxr0fTbP3QqNo0BBXUqZkzkvV0+DP0WcupI8ywBdbP3rNAdZw8hv170I2p4roUIHw5FGAVwov6cyiJK9ex/A0ir18MtSQf2AwBxCjwp+xeWnNgDSTJkqahg9uzXXdmH1a27149WQDnS7P8EdKgbB9MCEdDikho5o621Rwg/NRpTbwghPCOE8IwQwjNCTFz9ANQiK/PWdB0yAAAAAElFTkSuQmCC') var(--main-color) no-repeat left;padding-left:24px;
+                background-size:32px 32px;
+            }
+            .clipboard{
+                background:url(' data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAA20lEQVR4Ae3Wx0HDQBCG0SEcyU2wBagAUYwoAV3VA2qG7FCEYxX2XZ/z2MZkZoj7jg7zb96V6C+LIgI5N3QYska/f4W8hIQHlHEAu5RU4BTAEXco8wB2uQd1Q0ZgX+xQstAnFWskOvZNTsSeDk/fp3xgIRUP5IupFR/cMJN5BXSYCfKKD+4DPXP2f22AwxA5TLLDMnXYaA5HBYXzYQcU9sf12WqAUQS73KG45Xx24YBFxCtXpkYYXPqXVK9EGDxb7r0CFKdccE2bgcUQvULLe/EqrzzLGxwVURSNALohRG8lVWcGAAAAAElFTkSuQmCC') var(--main-color) no-repeat left; padding-left:24px; 
+                background-size:32px 32px;
+
+            }
+            .calculator{
+               background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAB+UlEQVRYCe3Bz0uTcQDH8c9I20Bdqcjc36DooV8IM0k8hF0SL0Ed8g+IwA5beigikTrUoVOX6jAa2x8RCVYgdIswqC45NonRj3nQxfbusB32PM/3+zj0exF8vaRjRwQf8duQOyQxGZYrTGKSkissYHJTrrCCyUO5QgGTvA6CWSrkmVYLAzxiB5MdVulXC9Pk+cWswhHlO02bLDLAdSqE+ck1BrnDF5q+EVUY7tKuRidqtMvIjiRVDqtKUja8woWXMuMcDVxocFZBRPiAK+8VxDzhtkgzQpQoo2QoEm5OflxiD7ssPWpDLzns9phSEBMUMcsSkQ8Rcpj94LzMSLBG0BY9MqCPEkFvGJIdXTzBLy0LlvB7zAnthwpeI7JgDK+yOkEdr6gsiOH1T52gjldUFsTwqqkTVPAalQXjeJW0H7p5hl9GFizj95Qu2ZFknaAivTIgTpmgNRIyY5ISZjki8iFCAbMiEwpihhp2OfrUhjgF7GpMyY+rhCuxxBgxYoyzTJlwVxTEOq68lQlnaOBCnXGZ8QIXnsuGBH85rN8MyY407XbpxC7tFhWGk3yl6RO3OM0824QpM0c/t/lM0ybdCsdltsmSUguneEAVkz/cI64WLvKaMjM6CPKYZOUKK5jclyssYHJDrpDC5IJcYRiTQbnDBn7vdOyI+A/vtlfGLtSHswAAAABJRU5ErkJggg==')  var(--main-color) no-repeat left;padding-left:24px;
+               background-size:32px 32px;
+            }
+            #_resultado{
+                text-align:justify;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, Arial, 'Trebuchet MS', sans-serif;
+                font-size:16px;
+                line-height: 1.5;
+            }
+        </style>
+        <script>
+        const formatEuro = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
+
+        function esNumero(evt) {
+           
+             // Only ASCII character in that range allowed
+             var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+             if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57) && ASCIICode!=44 && ASCIICode!=46)
+                 return false;
+           
+             if(ASCIICode==44 && evt.target.value.includes(",")) return false;
+             if(ASCIICode==46 && evt.target.value.includes(",")) return false;
+
+             if(ASCIICode==46){
+                // get old value
+                 var start = evt.target.selectionStart;
+                 var end = evt.target.selectionEnd;
+                 var oldValue = evt.target.value;
+
+                 // cambiar el punto por la coma
+                 var newValue = oldValue.slice(0, start) + ',' + oldValue.slice(end)
+                 evt.target.value = newValue;
+
+                // reemplazar el cursor
+                evt.target.selectionStart = evt.target.selectionEnd = start + 1;
+                evt.preventDefault();
+                return false;
+             } 
+
+             return true;
+        }
+
+        function getFloatValue(inputname){
+           return parseFloat(document.getElementById(inputname).value.replaceAll(",","."));
+        }
+
+        function getStrValue(floatvalue){
+            return formatEuro.format(floatvalue);
+            //floatvalue.toString().replaceAll(".",",");
+        }
+
+        function supuestoSel(){
+            //Seleccionar seg&uacute;n el total el tipo de c&aacute;lculos a realizar
+            let total=document.getElementById("_total").value;
+            if(isNaN(total) || total<1){
+                document.getElementById("_total").value=1;
+                alert("Debe indicar un n&uacute;mero de ofertas mayor o igual a 1.");
+                return false;
+            }
+           pintarOfertas(total);
+
+        }
+        function recalculaLinea(i){
+            let presupuesto=getFloatValue("_presupuesto");
+            let porcen=redondea((100-getFloatValue("_dto"+i))/100);
+            let precio=redondea(presupuesto*porcen);
+            document.getElementById("_oferta"+i).value=getStrValue(precio);
+        }
+
+        function pintarOfertas(total){
+        
+            
+            document.getElementById("_resultado").innerHTML="";
+            let tipocal=document.getElementById("tipocalculo").value;
+
+            let presupuesto=getFloatValue('_presupuesto');
+            if(presupuesto==0){
+                alert("Introduzca un importe de presupuesto superior a 0.")
+                return false;
+            }
+            document.getElementById("supuestotxt").innerHTML="<div style='margin-bottom:10px;'>Para un presupuesto base de liquidaci&oacute;n de <b>"+getStrValue(presupuesto)+"</b> (sin IVA) y "+total+" ofertas aplicar:</div>";
+            //TEXTO DEL SUPUESTO
+            if(total==1){
+                document.getElementById("supuestotxt").innerHTML+="Art.85.1.Cuando concurriendo <b>un solo licitador</b>, sea inferior al presupuesto base de licitaci&oacute;n en m&aacute;s de 25 unidades porcentuales.";
+              
+            }
+            else
+            if(total==2){
+                document.getElementById("supuestotxt").innerHTML+="Art.85.2.Cuando concurran <b>dos licitadores</b>, la que sea inferior en m&aacute;s de 20 unidades porcentuales a la otra oferta.";
+              
+            }
+            else
+            if(total==3){
+                document.getElementById("supuestotxt").innerHTML+=`Art.85.3.Cuando concurran <b>tres licitadores</b>, las que sean inferiores en m&aacute;s de 10 unidades porcentuales a la media aritm&eacute;tica de
+                las ofertas presentadas. No obstante, se excluir&aacute; para el c&oacute;mputo de dicha media la oferta de cuant&iacute;a m&aacute;s elevada cuando sea superior en m&aacute;s de 10 unidades porcentuales de
+                dicha media. En cualquier caso, se considerar&aacute; desproporcionada la baja superior a 25 unidades porcentuales (del presupesto base de licitaci&oacute;n).`;
+              
+            }
+            else 
+            if(total>3){
+                document.getElementById("supuestotxt").innerHTML+=`Art.85.4. Cuando concurran <b>cuatro o m&aacute;s licitadores</b>, las que sean inferiores en m&aacute;s de 10 unidades porcentuales a la media aritm&eacute;tica de las ofertas presentadas. No obstante, si entre ellas existen ofertas que sean superiores a dicha media
+    en m&aacute;s de 10 unidades porcentuales, se proceder&aacute; al c&aacute;lculo de una nueva media s&oacute;lo con las ofertas que no se encuentren en el supuesto indicado. En todo caso, si el n&uacute;mero de las restantes ofertas es inferior a tres, la nueva media se 
+    calcular&aacute; sobre las tres ofertas de menor cuant&iacute;a.`;
+              
+            }
+
+            //PINTAR TOTAL DE OFERTAS
+           let tablaOfertas="<table class='tabla_ofertas'>";
+            tablaOfertas+="<thead><tr class='cab'><td>Licitador</td>";
+            if(tipocal=='D') tablaOfertas+="<td>% Descuento</td>";
+            tablaOfertas+="<td>Importe</td>";
+            tablaOfertas+="<td></td></tr></thead><tbody>";
+                let clase='limpar';
+                for(let i=1;i<=total;i++){
+                    clase=(i%2==0)?"lpar":"limpar";
+                    tablaOfertas+="<tr class='"+clase+"'>";
+                    tablaOfertas+="<td class='"+clase+"'><input id='_licitador"+i+"' class='ok' type='text' size='60' maxlength='80' value='Licitador "+i+"' /></td>";
+                    if(tipocal=='D'){
+                        tablaOfertas+="<td class='"+clase+"'><input id='_dto"+i+"' class='ok' onchange='recalculaLinea("+i+");' type='text' size='5' maxlength='5' onkeypress='return esNumero(event)' value='0' />%</td>";
+                        tablaOfertas+="<td class='"+clase+"'><input id='_oferta"+i+"' type='text' size='10' maxlength='10' class='ok' readonly value='0'  /> &euro;</td>";
+
+                    }else{
+                        tablaOfertas+="<td class='"+clase+"'><input id='_oferta"+i+"' type='text' size='10' maxlength='10' class='ok' value='0' onkeypress='return esNumero(event)' /> &euro;</td>";
+                    }
+                    tablaOfertas+="<td class='"+clase+"'><input id='_estado"+i+"' type='text' tabindex=-1 size='20' maxlength='20' class='ok_estado' readonly value='&nbsp;' /></td>";
+
+                    tablaOfertas+="</tr>";
+                }
+                tablaOfertas+="</tbody></table>";
+                document.getElementById("capa_ofertas").innerHTML=tablaOfertas;
+                document.getElementById("capa_acciones").style.display='';
+           
+        }
+
+        function calcular(){
+
+            let total=document.getElementById("_total").value;
+            document.getElementById("_resultado").innerHTML="";
+
+            //Borrar campos de estado
+            for(let i=1;i<=total;i++){
+                document.getElementById("_estado"+i).value="";
+                marcarLinea(i,"ok");   
+            }
+            if(total==1) { calcula_sup1(total); }
+            else
+            if(total==2) { calcula_sup2(total); }
+            else
+            if(total==3) { calcula_sup3(total); }
+            else
+            if(total>3)  { calcula_sup4(total); }
+
+        }
+        function redondea(valor){
+            return Math.round((valor + Number.EPSILON) * 100) / 100;
+        }
+        function calcula_sup1(total){
+
+            let lim25=redondea(getFloatValue("_presupuesto")*0.75);
+            let oferta1=getFloatValue("_oferta1");
+            marcaLinea(1,"baja");
+            document.getElementById("_resultado").innerHTML=(oferta1<lim25)?"<span style='color:red;'>Causa baja. El importe es inferior al 25% del presupuesto: "+getStrValue(lim25)+".</span>":"No hay baja.";
+
+        }
+
+        function calcula_sup2(total){
+
+           let oferta1=getFloatValue("_oferta1");
+           let oferta2=getFloatValue("_oferta2");
+           
+           let baja="";
+           if(oferta1<oferta2){
+            let dif=oferta2-oferta1;
+            let porcen20=redondea(oferta2*0.2);
+            if(dif>porcen20){ 
+                baja="Existe una diferencia superior al 20% entre la oferta de licitador2 y licitador1. BAJA oferta de licitador1.";
+                marcaLinea(1,"baja");
+            }
+
+           }else{
+
+            let dif=oferta1-oferta2;
+            let porcen20=redondea(oferta1*0.2);
+            if(dif>porcen20){
+                 baja="Existe una diferencia superior al 20% entre la oferta de licitador1 y licitador2. BAJA oferta de licitador2.";
+                 marcaLinea(2,"baja");
+            }     
+           
+            }
+
+            document.getElementById("_resultado").innerHTML=(baja=='')?"No hay bajas: la diferencia entre ambos importes excede el 20%.":"<span style='color:red;'>"+baja+"</span>";
+        }
+
+        function calcula_sup3(total){
+            let lim25=redondea(getFloatValue("_presupuesto")*0.75);
+            
+            
+            //Calcular media inicial
+            let media=mediaAritmetica([1,2,3],"_oferta");
+            let mediaok=media;
+            let media10=redondea(media*1.10); //Media al 10%
+            
+            document.getElementById("_resultado").innerHTML+="<div>La media aritm&eacute;tica de todas las ofertas es <b>"+getStrValue(media)+"</b>. <br/>El valor tope que no debe superarse (10%) es de "+getStrValue(media10)+" &euro;.</div>"; 
+          
+            let lista2=[];
+            let excede=filtraMedia(media10, total, lista2);    
+            let recalcular=(excede!='');
+
+            if(recalcular){
+                let media2=mediaAritmetica(lista2,"_oferta");
+                mediaok=media2;
+                document.getElementById("_resultado").innerHTML+="<div>Exceden el 10% de la media ("+getStrValue(media10)+") la/s oferta/s de: <span style='color:#blue;'>"+excede.substring(1)+"</span>.<br/> Por tanto, se calcula una segunda media sin contar con esos valores, el resultado es <b>"+getStrValue(media2)+" </b> &euro;.</div>";
+            }else{
+                document.getElementById("_resultado").innerHTML+="<div>No hay importes que excedan del 10% de la media ("+getStrValue(media10)+"), por lo que se toma la media aritm&eacute;tica calculada inicialmente como referencia.</div>";
+
+            }
+            //Calcular Bajas
+            let limiteinf=redondea(mediaok*0.9); //Menos de un 10% - redondeado a dos decimales
+            let baja=calcularBaja((limiteinf<lim25)?lim25:limiteinf,total);
+            resultadoBajas(total, baja, limiteinf, lim25);
+
+        }
+
+        function calcula_sup4(total){
+            //Lista de Ofertas
+            let valores=[];
+            let lista=[];
+            for(let i=1;i<=total;i++){
+               lista.push(i);
+               valores.push(getFloatValue("_oferta"+i));
+            }
+            //Media aritm&eacute;tica 1
+            let media=mediaAritmetica(lista,"_oferta");
+            let mediaok=media;
+            let media10=redondea(media*1.10); //Media al 10%
+            document.getElementById("_resultado").innerHTML+="<div>La media aritm&eacute;tica de todas las ofertas es <b>"+getStrValue(media)+"</b>. <br/>El valor tope que no debe superarse (10%) es de "+getStrValue(media10)+".</div>"; 
+
+            //Media 3 valores inferiores
+            valores.sort((a, b) => {   
+                                if(a == b) {
+                                    return 0; 
+                                }
+                                if(a < b) {
+                                    return -1;
+                                }
+                                return 1;
+                        });
+             let media3=(valores[0]+valores[1]+valores[2])/3;
+             media3=Math.round((media3 + Number.EPSILON) * 100) / 100;
+
+            let lista2=[];
+            let excede=filtraMedia(media10, total, lista2);    
+            //Verificar si hay alguna cantidad superior en un 10% a la media calculada
+            let recalcular=(excede!='');
+            
+            if(recalcular){
+                if(lista2.length>=3){
+                
+                    //Son 3 o m&aacute;s ofertas, aplicar segunda media eliminando valores superiores al 10%
+                   let media2=mediaAritmetica(lista2,"_oferta");
+                   mediaok=media2;
+                   document.getElementById("_resultado").innerHTML+="<div>Exceden el 10% de la media la/s oferta/s de: <span style='color:blue;'>"+excede.substring(1)+"</span>. <br/> Por tanto, se calcula una segunda media sin contar con esos valores, el resultado es <b>"+getStrValue(media2)+"</b>.</div>";
+
+                }else{
+                    document.getElementById("_resultado").innerHTML+="<div>Exceden el 10% de la la/s oferta/s de: <span style='color:blue;'>"+excede.substring(1)+"</span>. <br/> Son menos de dos valores, se toma por tanto la media de los tres importes inferiores, que es "+getStrValue(media3)+" </b>.</div>";
+                    mediaok=media3;
+                } 
+            }else{
+                document.getElementById("_resultado").innerHTML+="<div>No hay importes que excedan del 10% de la media ("+getStrValue(media10)+"), por lo que toma la media aritm&eacute;tica calculada inicialmente como referencia.</div>";
+            }
+
+            //Finalmente, marcar bajas: inferiores a la media en un 10%
+            let limiteinf=redondea(mediaok*0.9); //Menos de un 10% - redondeado a dos decimales
+            let baja=calcularBaja(limiteinf,total);
+            resultadoBajas(total, baja, limiteinf);
+            
+        }
+
+        function filtraMedia(tope, total, lista2){
+            let excede="";
+          
+            for(let i=1;i<=total;i++){
+                valor=getFloatValue("_oferta"+i); 
+                if(valor>tope){
+                    excede+=", "+document.getElementById("_licitador"+i).value+" ";
+                    marcarLinea(i,"excede");
+                    document.getElementById("_estado"+i).value="Excede 10%";
+
+                }else{
+                    marcarLinea(i,"ok");
+                    lista2.push(i);    
+                }
+            }
+            return excede;
+        }
+
+        function calcularBaja(limiteinf,total){
+            let baja="";
+            for(let i=1;i<=total;i++){
+                valor=getFloatValue("_oferta"+i);
+                if(valor<limiteinf){
+                    baja+=", "+document.getElementById("_licitador"+i).value+" ";
+                    marcarLinea(i,"baja");
+                    document.getElementById("_estado"+i).value="Baja";
+                }
+            }
+            return baja;
+        }
+
+        function resultadoBajas(total, baja, limiteinf, lim25){
+            document.getElementById("_resultado").innerHTML+="<div><b> BAJAS:</b><br/> Las que sean inferiores en un 10% a la &uacute;ltima media calculada (concretamente "+getStrValue(limiteinf)+").";
+            if(total==3){
+                document.getElementById("_resultado").innerHTML+="Y, en todo caso, las que sean inferiores en un 25% al presupuesto (concretamente "+getStrValue(lim25)+").";
+            }
+            if(baja=="")   
+                document.getElementById("_resultado").innerHTML+="<div style='color:green;'>No hay bajas.</div>";
+            else
+                document.getElementById("_resultado").innerHTML+="<div>Luego son bajas las ofertas de: <span style='color:red;'>"+baja.substring(1)+"</span>.</div>";
+            document.getElementById("_resultado").innerHTML+="</div>"; 
+        }
+
+        function marcarLinea(indice,clase){
+            document.getElementById("_oferta"+indice).className=clase;
+            document.getElementById("_licitador"+indice).className=clase;
+            document.getElementById("_estado"+indice).className=clase+"_estado";
+        }
+
+        function mediaAritmetica(listaDeOfertas,prefijo){
+            let media=0;
+            let total=listaDeOfertas.length;
+            for(let i=0;i<total;i++)
+                media+=parseFloat(document.getElementById(prefijo+listaDeOfertas[i]).value.replaceAll(",",".")); 
+            media=(media/total);
+            //Redondear
+            media=Math.round((media + Number.EPSILON) * 100) / 100;
+            return media;
+        }
+
+        function pasaATexto(){
+            let total=document.getElementById("_total").value;
+            let texto="";
+            for(let i=1;i<=total;i++){
+                let licitador=document.getElementById("_licitador"+i).value+"  ";
+                for(j=licitador.length;j<=60;j++){
+                    licitador+=".";
+                }
+                texto+=licitador+" ";
+                
+                let oferta=document.getElementById("_oferta"+i).value;
+                for(j=oferta.length;j<=10;j++) oferta=" "+oferta;
+                texto+=oferta+" €   ";
+                texto+=document.getElementById("_estado"+i).value+"\r\n";
+            }
+            return texto;
+        }
+
+        async function copiarAlPortapapeles() {
+                try {
+                    let res=document.getElementById("_resultado");
+                    let texto=pasaATexto();
+                    texto+="\r\n";
+                    texto+= res.textContent || res.innerText; 
+                    await navigator.clipboard.writeText(texto);
+                    alert('Texto copiado al portapapeles');
+
+                } catch (err) {
+                    alert('Error al copiar al portapapeles:', err)
+                }
+        }
+
+        function cambiaEstilo(){
+            let estilo=document.getElementById("estilo").value;
+           
+            if(estilo=='V'){
+                document.documentElement.style.setProperty('--main-bg-color',  '#d8ebd0');
+                document.documentElement.style.setProperty('--main-color', '#aacc9b');
+            }else  
+            if(estilo=='A'){
+                document.documentElement.style.setProperty('--main-bg-color', '#cbdbf5');
+                document.documentElement.style.setProperty('--main-color', '#4287f5');
+            }else  
+            if(estilo=='R'){
+                document.documentElement.style.setProperty('--main-bg-color', '#FCCCCC');
+                document.documentElement.style.setProperty('--main-color', '#CC0000');
+            }else  
+            if(estilo=='G'){
+                document.documentElement.style.setProperty('--main-bg-color', '#ccc');
+                document.documentElement.style.setProperty('--main-color', '#000');
+            }else
+            if(estilo=='N'){
+                document.documentElement.style.setProperty('--main-bg-color', '#fcefde');
+                document.documentElement.style.setProperty('--main-color', '#f7981b'); 
+            }else{
+                //Azul por defecto
+                document.documentElement.style.setProperty('--main-bg-color', '#cbdbf5');
+                document.documentElement.style.setProperty('--main-color', '#4287f5');
+            }
+            
+        }
+        </script>
+    </head>
+    <body>
+       <div id="ppal">
+        <div align="center"><h3>C&aacute;lculo de las ofertas desproporcionadas o temerarias en las subastas.</h3></div>
+        <div align="right" style="font-size:12px;font-family:Tahoma;">
+            Estilo Visual:
+            <select name="estilo" id="estilo" onchange="cambiaEstilo();" style="border:0px;color:var(--main-color);border-bottom:1px solid var(--main-color);padding:4px;margin-bottom:8px;background:#fff;">
+                <option value="A">Azul</option>
+                <option value="G">B/N</option>
+                <option value="V">Verde</option>
+                <option value="R">Rojo</option>
+                <option value="N">Naranja</option>
+            </select>
+        </div>
+        <div>
+        <div style="border-bottom:1px solid var(--main-bg-color);width:100%;margin:auto;padding:4px;">
+            <div align="center">
+           Presupuesto Base de Licitaci&oacute;n: 
+            <input id="_presupuesto" type="text" class="ok" size="10" maxlength="10" value="0"  onkeypress="return esNumero(event)" />  &euro; (sin IVA)
+
+           Total de ofertas:
+            <input id="_total" type="text" class="ok" size="3" maxlength="3" value="4" onkeypress="return esNumero(event)" /> 
+
+            Grabar:
+            <select id="tipocalculo">
+                <option value="B">IMPORTES DIRECTOS</option>
+                <option value="D">DESCUENTOS SOBRE EL PRESUPUESTO</option>
+            </select>
+                <div style="margin-top:10px;"">
+                    <input type="button" class="boton reload" value="Generar Nueva Tabla" onclick="supuestoSel();" />
+                </div>
+            </div>
+        </div>
+
+ <!-- Cuatro o m&aacute;s-->
+        <div id="supuestotxt" style="padding:10px;text-align:justify;"></div>
+
+        <div id="capa_ofertas" style="width:fit-content;margin:auto;"></div>
+
+        <div id="capa_acciones" style="width:600px;margin:auto;padding:10px;border-bottom:1px solid var(--main-bg-color);display:none;">
+            <div id="box" style="display:flex;flex-direction:row;align-items:center">
+            <div align="center" style="flex:1;">
+                <input type="button" onclick="copiarAlPortapapeles();" class="boton clipboard" value="Copiar al Portapapeles" />
+            </div>
+            <div align="center" style="flex:1;">
+                <input type="button" id="calcular" value="Calcular" class="boton calculator" onclick="calcular();" />
+            </div>            
+            </div>
+        </div>
+
+        <div id="_resultado"></div>
+
+       
+
+        </div>
+      </div>  <!-- fin ppal-->
+    </body>
+</html>
