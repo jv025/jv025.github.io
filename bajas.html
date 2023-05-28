@@ -276,7 +276,9 @@
             let dif=oferta2-oferta1;
             let porcen20=redondea(oferta2*0.2);
             if(dif>porcen20){ 
-                baja="Existe una diferencia superior al 20% entre la oferta de licitador2 y licitador1. BAJA oferta de licitador1.";
+                baja="La diferencia entre oferta2 y oferta 1 es "+dif+".<br/>";
+                baja+="El 20% de oferta 2 es: "+porcen20+".<br/>";
+                baja+="La diferencia superior al 20% entre la oferta de licitador2 y licitador1. BAJA oferta de licitador1.";
                 marcarLinea(1,"baja");
             }
 
@@ -285,8 +287,10 @@
             let dif=oferta1-oferta2;
             let porcen20=redondea(oferta1*0.2);
             if(dif>porcen20){
-                 baja="Existe una diferencia superior al 20% entre la oferta de licitador1 y licitador2. BAJA oferta de licitador2.";
-                 marcarLinea(2,"baja");
+                baja="La diferencia entre oferta1 y oferta 2 es "+dif+".<br/>";
+                baja+="El 20% de oferta 1 es: "+porcen20+".<br/>";
+                baja+="Existe una diferencia superior al 20% entre la oferta de licitador1 y licitador2. BAJA oferta de licitador2.";
+                marcarLinea(2,"baja");
             }     
            
             }
@@ -411,9 +415,9 @@
         }
 
         function resultadoBajas(total, baja, limiteinf, lim25){
-            document.getElementById("_resultado").innerHTML+="<div><b> BAJAS:</b><br/> Las que sean inferiores en un 10% a la &uacute;ltima media calculada (concretamente "+getStrValue(limiteinf)+").";
+            document.getElementById("_resultado").innerHTML+="<div><b> BAJAS:</b><br/> Las que sean inferiores en un 10% a la &uacute;ltima media calculada (concretamente menos de "+getStrValue(limiteinf)+").";
             if(total==3){
-                document.getElementById("_resultado").innerHTML+="Y, en todo caso, las que sean inferiores en un 25% al presupuesto (concretamente "+getStrValue(lim25)+").";
+                document.getElementById("_resultado").innerHTML+="Y, en todo caso, las que sean inferiores en un 25% al presupuesto (concretamente menos de "+getStrValue(lim25)+").";
             }
             if(baja=="")   
                 document.getElementById("_resultado").innerHTML+="<div style='color:green;'>No hay bajas.</div>";
