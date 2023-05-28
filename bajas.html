@@ -262,6 +262,7 @@
             let lim25=redondea(getFloatValue("_presupuesto")*0.75);
             let oferta1=getFloatValue("_oferta1");
             marcarLinea(1,"baja");
+            document.getElementById("_estado1").value="Baja";
             document.getElementById("_resultado").innerHTML=(oferta1<lim25)?"<span style='color:red;'>Causa baja. El importe es inferior al 25% del presupuesto: "+getStrValue(lim25)+".</span>":"No hay baja.";
 
         }
@@ -284,6 +285,8 @@
                 baja+="El 20% de la oferta mayor (oferta de "+licitador2+") es: "+getStrValue(porcen20)+". La diferencia sobrepasa el 20%. <br/>";
                 baja+="Es BAJA la oferta de "+licitador1+" ya que es inferior en más del 20% respecto de la otra oferta.";
                 marcarLinea(1,"baja");
+                document.getElementById("_estado1").value="Baja";
+
             }else{
                 nobaja="La diferencia entre ambas ofertas: "+getStrValue(dif)+" , no supera el 20% de la oferta mayor: "+getStrValue(porcen20)+".";
             }
@@ -296,7 +299,9 @@
                 baja="La diferencia entre las dos ofertas es de "+getStrValue(dif)+". ";
                 baja+="El 20% de la oferta mayor (oferta de "+licitador1+") es: "+getStrValue(porcen20)+". La diferencia sobrepasa el 20%. <br/>";
                 baja+="Es BAJA la oferta de "+licitador2+" ya que es inferior en más del 20% respecto de la otra oferta.";
-                  marcarLinea(2,"baja");
+                marcarLinea(2,"baja");
+                document.getElementById("_estado2").value="Baja";
+
             }else{
                 nobaja="La diferencia entre ambas ofertas: "+getStrValue(dif)+" , no supera el 20% de la oferta mayor: "+getStrValue(porcen20)+".";
             }     
