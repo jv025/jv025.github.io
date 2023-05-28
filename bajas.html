@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Bajas - pruebas</title>
+        <title>Cálculo Bajas art85</title>
         <style>
             :root {
                 --main-bg-color: #cbdbf5;
@@ -270,16 +270,22 @@
 
            let oferta1=getFloatValue("_oferta1");
            let oferta2=getFloatValue("_oferta2");
+           let licitador1=document.getElementById("_licitador1").value;
+           let licitador2=document.getElementById("_licitador2").value;
            
            let baja="";
+           let nobaja="";
+           let licitadorx="";
            if(oferta1<oferta2){
             let dif=oferta2-oferta1;
             let porcen20=redondea(oferta2*0.2);
             if(dif>porcen20){ 
-                baja="La diferencia entre oferta2 y oferta 1 es "+dif+".<br/>";
-                baja+="El 20% de oferta 2 es: "+porcen20+".<br/>";
-                baja+="La diferencia superior al 20% entre la oferta de licitador2 y licitador1. BAJA oferta de licitador1.";
+                baja="La diferencia entre las dos ofertas es de "+getStrValue(dif)+". ";
+                baja+="El 20% de la oferta mayor (oferta de "+licitador2+") es: "+getStrValue(porcen20)+". La diferencia sobrepasa el 20%. <br/>";
+                baja+="Es BAJA la oferta de "+licitador1+" ya que es inferior en más del 20% respecto de la otra oferta.";
                 marcarLinea(1,"baja");
+            }else{
+                nobaja="La diferencia entre ambas ofertas: "+getStrValue(dif)+" , no supera el 20% de la oferta mayor: "+getStrValue(porcen20)+".";
             }
 
            }else{
@@ -287,15 +293,17 @@
             let dif=oferta1-oferta2;
             let porcen20=redondea(oferta1*0.2);
             if(dif>porcen20){
-                baja="La diferencia entre oferta1 y oferta 2 es "+dif+".<br/>";
-                baja+="El 20% de oferta 1 es: "+porcen20+".<br/>";
-                baja+="Existe una diferencia superior al 20% entre la oferta de licitador1 y licitador2. BAJA oferta de licitador2.";
-                marcarLinea(2,"baja");
+                baja="La diferencia entre las dos ofertas es de "+getStrValue(dif)+". ";
+                baja+="El 20% de la oferta mayor (oferta de "+licitador1+") es: "+getStrValue(porcen20)+". La diferencia sobrepasa el 20%. <br/>";
+                baja+="Es BAJA la oferta de "+licitador2+" ya que es inferior en más del 20% respecto de la otra oferta.";
+                  marcarLinea(2,"baja");
+            }else{
+                nobaja="La diferencia entre ambas ofertas: "+getStrValue(dif)+" , no supera el 20% de la oferta mayor: "+getStrValue(porcen20)+".";
             }     
            
             }
 
-            document.getElementById("_resultado").innerHTML=(baja=='')?"No hay bajas: la diferencia entre ambos importes excede el 20%.":"<span style='color:red;'>"+baja+"</span>";
+            document.getElementById("_resultado").innerHTML=(baja=='')?"No hay bajas: la diferencia entre ambos importes NO excede el 20%.<br/>"+nobaja:"<span style='color:red;'>"+baja+"</span>";
         }
 
         function calcula_sup3(total){
