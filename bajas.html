@@ -261,7 +261,7 @@
 
             let lim25=redondea(getFloatValue("_presupuesto")*0.75);
             let oferta1=getFloatValue("_oferta1");
-            marcaLinea(1,"baja");
+            marcarLinea(1,"baja");
             document.getElementById("_resultado").innerHTML=(oferta1<lim25)?"<span style='color:red;'>Causa baja. El importe es inferior al 25% del presupuesto: "+getStrValue(lim25)+".</span>":"No hay baja.";
 
         }
@@ -277,7 +277,7 @@
             let porcen20=redondea(oferta2*0.2);
             if(dif>porcen20){ 
                 baja="Existe una diferencia superior al 20% entre la oferta de licitador2 y licitador1. BAJA oferta de licitador1.";
-                marcaLinea(1,"baja");
+                marcarLinea(1,"baja");
             }
 
            }else{
@@ -286,7 +286,7 @@
             let porcen20=redondea(oferta1*0.2);
             if(dif>porcen20){
                  baja="Existe una diferencia superior al 20% entre la oferta de licitador1 y licitador2. BAJA oferta de licitador2.";
-                 marcaLinea(2,"baja");
+                 marcarLinea(2,"baja");
             }     
            
             }
